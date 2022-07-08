@@ -1,22 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Planeteer() {
+function Planeteer({planeteer, conditionallyRender}) {
+
+  // const [render, setRender] = useState(true)
+
+  function basedinUSA() {
+    if (planeteer.fromUSA === true) {
+      return 'USA-based'
+    }
+    else {
+      return 'Working overseas'
+    }
+  }
+
+  //{planeteer.clicked ? <p className="card__text">{planeteer.quote}</p> : <p className="card__text">{planeteer.bio}</p>}
+
   return (
-    <li className="cards__item">
+    <li className="cards__item"
+    onClick={conditionallyRender}>
       <div className="card">
         <img
-          src={"RENDER IMAGE"}
-          alt={"RENDER PERSON NAME"}
+          src={planeteer.pictureUrl}
+          alt={planeteer.name}
           className="card__image"
         />
         <div className="card__content">
-          <div className="card__title">{"RENDER NAME"}</div>
-          <p className="card__text">{"CONDITIONALLY RENDER BIO OR QUOTE"}</p>
+          <div className="card__title">{planeteer.name}</div>
+          <p className="card__text">{planeteer.clicked === true ? planeteer.quote : planeteer.bio}</p>
           <div className="card__detail">
-            <p>{"RENDER TWITTER HANDLE"}</p>
+            <p>{planeteer.twitter}</p>
             <p>
               {
-                "CONDITIONALLY RENDER WHETHER THE PERSON IS USA-BASED OR WORKING OVERSEAS"
+                basedinUSA(planeteer)
               }
             </p>
           </div>
